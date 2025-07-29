@@ -1,20 +1,20 @@
-# Use an official Node.js image as the base image
-FROM node:18-alpine
+# Use the full Node.js image (not Alpine)
+FROM node:18
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json to leverage Docker's caching
+# Copy dependencies files
 COPY package*.json ./
 
-# Install application dependencies
+# Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# Copy source code
 COPY . .
 
-# Expose the port on which the Node.js application will run
+# Expose Vite port
 EXPOSE 5173
 
-# Command to start the Node.js application when the container launches
+# Start Vite dev server
 CMD ["npm", "run", "dev"]
